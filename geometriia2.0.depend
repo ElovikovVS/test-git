@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1489385416 source:d:\cppprojects\geometriia2.0\main.cpp
+	<iostream>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+

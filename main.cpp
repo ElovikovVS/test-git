@@ -21,10 +21,10 @@ void filling(vektor A[])
 
 }
 // подсчет псевдоскал€рного произведени€
-int Bridle(vektor B[], vektor C[], int i, int j)
+int composition(vektor B[], vektor C[], int i, int j)
 {
     int a;
-    if (j<=N-1) a=((B[i].x-C[j].x)*(C[j+1].y-C[j].y)-(B[i].y-C[j].y)*(C[j+1].x-C[j].x));
+    if (j<=N-2) a=((B[i].x-C[j].x)*(C[j+1].y-C[j].y)-(B[i].y-C[j].y)*(C[j+1].x-C[j].x));
         else a=((B[i].x-C[j].x)*(C[0].y-C[j].y)-(B[i].y-C[j].y)*(C[0].x-C[j].x));
     return a;
 }
@@ -39,8 +39,8 @@ int test(vektor A[], vektor B[])
         one=0;
         for (int j=0; j<N; ++j)
         {
-            if (Bridle(A,B,i,j)<0) minone++;
-            else if (Bridle(A,B,i,j)>0) one++;
+            if (composition(A,B,i,j)<0) minone++;
+            else if (composition(A,B,i,j)>0) one++;
                  else zero++;
         }
         if (((zero==1)||(zero==2))&&((minone==N-zero)||(one==N-zero))) zero1++;
@@ -64,11 +64,47 @@ int main()
     vektor Quadrilateral1[N], Quadrilateral2[N];
     filling(Quadrilateral1);
     filling(Quadrilateral2);
-    if (test(Quadrilateral1,Quadrilateral2)==3) printf("match up");
-    if (test(Quadrilateral1,Quadrilateral2)==2) printf("The second lies in the first");
-    if (test(Quadrilateral1,Quadrilateral2)==1) printf("Intersect");
-    if ((test(Quadrilateral1,Quadrilateral2)==0)&&(test(Quadrilateral2,Quadrilateral1)==2)) printf("The first lies in the second");
-    else printf("Do not intersect");
+
+
+    for (int i=0;i<N;i++)
+    {
+        printf (" %d ",Quadrilateral1[i].x);
+    }
+    printf("\n");
+    for (int i=0;i<N;i++)
+    {
+        printf (" %d ",Quadrilateral1[i].y);
+    }
+    printf("\n");
+    for (int i=0;i<N;i++)
+    {
+        printf (" %d ",Quadrilateral2[i].x);
+    }
+    printf("\n");
+    for (int i=0;i<N;i++)
+    {
+        printf (" %d ",Quadrilateral2[i].y);
+    }
+
+
+    int c=test(Quadrilateral1,Quadrilateral2);
+    printf ("\n %d ",c);
+    switch (c)
+    {
+        case 3:
+             printf("match up \n");
+             break;
+        case 2:
+             printf("The second lies in the first \n");
+             break;
+        case 1:
+             printf("Intersect \n");
+             break;
+        default:
+             if ((c==0)&&(test(Quadrilateral2,Quadrilateral1)==2)) printf("The first lies in the second \n");
+            // else printf("Do not intersect \n");
+    }
+
 system("pause");
 return 1;
 }
